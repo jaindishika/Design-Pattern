@@ -7,6 +7,10 @@ import com.designPattern.Command.CustomerService;
 import com.designPattern.Command.fw.Button;
 import com.designPattern.Memento.Editor;
 import com.designPattern.Memento.History;
+import com.designPattern.decorator.CloudStream;
+import com.designPattern.decorator.CompressedCloudStream;
+import com.designPattern.decorator.EncryptedCloudStream;
+import com.designPattern.decorator.Stream;
 import com.designPattern.state.BrushTool;
 import com.designPattern.state.Canvas;
 import com.designPattern.strategy.BlackAndWhiteFilter;
@@ -51,5 +55,12 @@ public class Main {
 //        Adapter Pattern
 //        var ImageView = new ImageView(new Image());
 //        ImageView.apply(new CaramelFilter(new Caramel()));
+
+//        Decorator Pattern
+        StoreCreditCard(new EncryptedCloudStream(new CompressedCloudStream(new CloudStream())));
+
+    }
+    public static void StoreCreditCard(Stream stream){
+        stream.write("123-456-789");
     }
 }
