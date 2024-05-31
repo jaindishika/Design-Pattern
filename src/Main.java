@@ -11,6 +11,9 @@ import com.designPattern.decorator.CloudStream;
 import com.designPattern.decorator.CompressedCloudStream;
 import com.designPattern.decorator.EncryptedCloudStream;
 import com.designPattern.decorator.Stream;
+import com.designPattern.observer.Chart;
+import com.designPattern.observer.DataSource;
+import com.designPattern.observer.SpreadSheet;
 import com.designPattern.state.BrushTool;
 import com.designPattern.state.Canvas;
 import com.designPattern.strategy.BlackAndWhiteFilter;
@@ -57,10 +60,24 @@ public class Main {
 //        ImageView.apply(new CaramelFilter(new Caramel()));
 
 //        Decorator Pattern
-        StoreCreditCard(new EncryptedCloudStream(new CompressedCloudStream(new CloudStream())));
+//        var Read = new CloudStream();
+//        var Compress = new CompressedCloudStream(Read);
+//        var Encrypt = new EncryptedCloudStream(Compress);
+//        StoreCreditCard(Encrypt);
 
+//        Observer Pattern
+        var dataSource = new DataSource();
+        var sheet1 = new SpreadSheet(dataSource);
+        var sheet2 = new SpreadSheet(dataSource);
+        var chart = new Chart(dataSource);
+
+        dataSource.addObserver(sheet1);
+        dataSource.addObserver(sheet2);
+        dataSource.addObserver(chart);
+
+        dataSource.setValue(1);
     }
-    public static void StoreCreditCard(Stream stream){
-        stream.write("123-456-789");
-    }
+//    public static void StoreCreditCard(Stream stream){
+//        stream.write("123-456-789");
+//    }
 }
